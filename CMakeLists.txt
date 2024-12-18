@@ -3,4 +3,4 @@ project(ImageProcessing)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(main a1.cpp)
+add_executable(inv inversion.cpp)
