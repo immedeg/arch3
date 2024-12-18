@@ -117,20 +117,20 @@ void producer(Consumer& consumer, unsigned char* image, int width, int height, i
 int main() {
     int width, height, channels;
     
-    unsigned char* image = stbi_load("/Users/yusha/Documents/GitHub/arch3/input1.jpg", &width, &height, &channels, 0);
+    unsigned char* image = stbi_load("input.jpg", &width, &height, &channels, 0);
     if (!image) {
         std::cerr << "Could not open or find the image\n";
         return 1;
     }
 
-    Consumer consumer(std::thread::hardware_concurrency());
+    const int num_tasks = std::thread::hardware_concurrency(); // Количество потоков
 
-    const int num_tasks = 8; // Количество задач
+    Consumer consumer(num_tasks);
     producer(consumer, image, width, height, channels, num_tasks);
 
     // Дожидаемся завершения потоков, работающих в Consumer
 
-    if (!stbi_write_png("/Users/yusha/Documents/GitHub/arch3/output.png", width, height, channels, image, width * channels)) {
+    if (!stbi_write_png("output.png", width, height, channels, image, width * channels)) {
         std::cerr << "Failed to save the output image\n";
         stbi_image_free(image);
         return 1;
