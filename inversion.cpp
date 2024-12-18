@@ -117,7 +117,7 @@ void producer(Consumer& consumer, unsigned char* image, int width, int height, i
 int main() {
     int width, height, channels;
     
-    unsigned char* image = stbi_load("/Users/yusha/Documents/VSCode/archit/lab#3/input1.jpg", &width, &height, &channels, 0);
+    unsigned char* image = stbi_load("/Users/yusha/Documents/GitHub/arch3/input1.jpg", &width, &height, &channels, 0);
     if (!image) {
         std::cerr << "Could not open or find the image\n";
         return 1;
@@ -130,7 +130,7 @@ int main() {
 
     // Дожидаемся завершения потоков, работающих в Consumer
 
-    if (!stbi_write_png("/Users/yusha/Documents/VSCode/archit/lab#3/output.png", width, height, channels, image, width * channels)) {
+    if (!stbi_write_png("/Users/yusha/Documents/GitHub/arch3/output.png", width, height, channels, image, width * channels)) {
         std::cerr << "Failed to save the output image\n";
         stbi_image_free(image);
         return 1;
